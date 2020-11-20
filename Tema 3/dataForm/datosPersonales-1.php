@@ -10,7 +10,7 @@ $textoh1 = "Datos personales 5 (Formulario)";
 
 cabecera($titulo, $estilo, $tituloCSS, $textoh1);
 ?>
-    <form action="?submitted" method="post">
+    <form action="" method="post">
         <p>Escriba los datos siguientes:</p>
 
         <table>
@@ -78,8 +78,8 @@ cabecera($titulo, $estilo, $tituloCSS, $textoh1);
         </table>
 
         <p>
-            <input type="submit" value="Enviar">
-            <input type="reset" value="Borrar">
+            <input type="submit" name="submit" value="Enviar">
+            <input type="reset" name="reset" value="Borrar">
         </p>
     </form>
     <div id="result" style="visibility: hidden;">
@@ -110,8 +110,8 @@ $literaturaOk  = false;
 $musicaOk      = false;
 $tebeosOk      = false;
 $televisionOk  = false;
-if (location.search === '?submitted') {
-    	document.getElementById("result").style.visibility = "visible";
+if (isset($_POST['submit'])) {
+    	echo "<script>document.getElementById('result').style.visibility = 'visible';</script>";
 }
 if ($nombre == "") {
     print "  <p class=\"aviso\">No ha escrito su nombre.</p>\n";
