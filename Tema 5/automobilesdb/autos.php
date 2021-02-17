@@ -19,8 +19,6 @@ if ( isset($_POST['make']) && isset($_POST['year'])
     }elseif (!is_numeric($_POST['year']) || !is_numeric($_POST['mileage']) ){
         $failure="Mileage and year must be numeric";
     }else{
-        $sql = "INSERT INTO users (name, email, password) 
-              VALUES (:name, :email, :password)";
         $stmt = $pdo->prepare('INSERT INTO autos
         (make, year, mileage) VALUES ( :mk, :yr, :mi)');
         $stmt->execute(array(

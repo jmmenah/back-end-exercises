@@ -15,7 +15,10 @@ $failure = false;  // If we have no POST data
 if ( isset($_POST['who']) && isset($_POST['pass']) ) {
     if ( strlen($_POST['who']) < 1 || strlen($_POST['pass']) < 1 ) {
         $failure = "User name and password are required";
-    } else {
+    }elseif (preg_match('/@/',$_POST['who'])){
+        $failure = "Email must have an at-sign (@)";
+    }
+    else {
         $check = hash('md5', $salt.$_POST['pass']);
         if ( $check == $stored_hash ) {
             // Redirect the browser to game.php
