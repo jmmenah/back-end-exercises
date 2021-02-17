@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+   https://programarivm.com/lista-dinamica-de-provincias-y-regiones-con-ajax-json-y-jquery/
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Ejemplo de provincias y autonomías</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript">             
+            $(document).ready(function() {               
+                $('#comunidades').change(function() {
+                    $('#resto-form').show();
+                   // var idComunidad = $(this).attr('value');
+                    var idComunidad = $(this).val();
+                    $('#provincias').empty();
+                    $.getJSON('response.php?id=' + idComunidad, function(data) {
+                        $.each(data.provincias, function(key, val) {
+                            $('#provincias').append('<option>' + val + '</option>');                             
+                        });
+                    });                     
+                });                 
+            });             
+        </script>   
+    </head>
+    <body>
+        <form>
+            <label>Comunidad:</label>               
+            <select id="comunidades" name="comunidad">
+                <option>Selecciona una comunidad...</option>
+                <option value="0">Andalucía</option>
+                <option value="1">Aragón</option>
+                <option value="2">Catalunya</option>                   
+            </select>
+            <div id="resto-form" style="display:none">
+                <label>Provincia:</label>
+                <select id="provincias" name="provincia">
+                </select>
+                <input type="submit" value="enviar"/>
+            </div>
+        </form>
+    </body>
+</html>

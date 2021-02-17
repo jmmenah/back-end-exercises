@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>PHP Respect Validation tutorial - validating PHP values with Respect Validation</title>
+<head>
+<link rel="stylesheet" href="PHP Respect Validation tutorial - validating PHP values with Respect Validation_files/style.css" type="text/css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="PHP, validation, Rakit Validation, collections">
+<meta name="description" content="PHP Respect Validation tutorial shows how to validate 
+PHP values with Respect Validation package.">
+<meta name="author" content="Jan Bodnar">
+
+<script src="https://cdn.adapex.io/hb/aaw.zetc.js" async></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5536206-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+
+<div>
+<a href="/" title="Home">ZetCode</a>
+</div>
+
+<nav>
+    <a title="All tutorials" href="/all/">All</a>
+    <a title="Spring Boot tutorials" href="/all/#springboot">Spring Boot</a>
+    <a title="Python tutorials" href="/all/#python">Python</a>
+    <a title="C# tutorials" href="/all/#csharp">C#</a>
+    <a title="Java tutorials" href="/all/#java">Java</a>
+    <a title="JavaScript tutorials" href="/all/#js">JavaScript</a>
+    <a title="Subscribe to ZetCode news" href="http://zetcode.us13.list-manage.com/subscribe?u=9def9ccd4c70dbbaf691f90fc&id=6556210f80">Subscribe</a>
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="ltow">
+    
+<div id="ebooks">
+
+<h2 class="blu">Ebooks</h2>
+
+<ul>
+<li><a href="/ebooks/advancedpyqt5/">PyQt5 ebook</a></li>
+<li><a href="/ebooks/tkinter/">Tkinter ebook</a></li>
+<li><a href="/ebooks/sqlitepython/">SQLite Python</a></li>
+<li><a href="/ebooks/advancedwxpython/">wxPython ebook</a></li>
+<li><a href="/ebooks/windowsapi/">Windows API ebook</a></li>
+<li><a href="/ebooks/advancedjavaswing/">Java Swing ebook</a></li>
+<li><a href="/ebooks/javagames/">Java games ebook</a></li>
+<li><a href="/ebooks/mysqljava/">MySQL Java ebook</a></li>
+</ul>
+
+</div>
+
+
+</div>
+
+<div class="content">
+
+
+<h1>PHP Respect Validation tutorial</h1>
+
+<p class="last_mod">
+last modified July 5, 2020 
+</p>
+
+<p>
+PHP Respect Validation tutorial shows how to validate 
+PHP values with Respect Validation package. 
+</p>
+
+<div class="social">
+    
+<div class="fb-like" data-href="http://zetcode.com/php/respectvalidation/" data-layout="button_count" 
+    data-action="like" data-show-faces="true" data-share="true"></div>   
+
+
+</div>
+
+<h2>Respect Validation</h2>
+
+<p>
+<em>Respect Validation</em> is a PHP Standalone Validation Library. 
+</p>
+
+
+
+<div class='ad-board-header' data-aaad='true' data-aa-adunit='/232881841/ZETC_728v_1'></div>
+<div class='ad-mob-header' data-aaad='true' data-aa-adunit='/232881841/ZETC_Mob_300v_1'></div>
+
+
+<h2>Installation</h2>
+
+<pre class="compact">
+$ composer require respect/validation
+$ composer require tightenco/collect
+</pre>
+
+<p>
+We install the Respect Validation package and the Laravel's collection package.
+</p>
+
+<h2>Respect Validation simple example</h2>
+
+<p>
+In the first example, we show how to do a very simple validation.
+</p>
+
+<div class="codehead">simple.php</div>
+<pre class="code">
+&lt;?php
+
+require('vendor/autoload.php');
+
+use Respect\Validation\Validator as v;
+
+$name = "John Doe";
+
+$r = v::alnum()->validate($name);
+
+if ($r) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+</pre>
+
+<p>
+The example validates one value.
+</p>
+
+<pre class="explanation">
+use Respect\Validation\Validator as v;
+</pre>
+
+<p>
+We include the validator.
+</p>
+
+<pre class="explanation">
+$r = v::alnum()->validate($name);
+</pre>
+
+<p>
+The <code>alnum</code> is a validation rule that allows alphanumeric values.
+It also allows a space. The <code>validate()</code> method validates the rule 
+and returns a boolean value indicating failure or success.
+</p>
+
+<pre class="explanation">
+if ($r) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+</pre>
+
+<p>
+Based on the returned value, we show the validation message.
+</p>
+
+<pre class="compact">
+$ php simple.php
+Validation passed
+</pre>
+
+<p>
+This is the output.
+</p>
+
+<h2>Adding a character</h2>
+
+<p>
+We can add a character to a rule. 
+</p>
+
+<div class="codehead">add_character.php</div>
+<pre class="code">
+&lt;?php
+
+require('vendor/autoload.php');
+
+use Respect\Validation\Validator as v;
+
+$name = "Vane-Tempest-Stewart";
+
+$r = v::alnum('-')->validate($name);
+
+if ($r) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+</pre>
+
+<p>
+In the example, we add a dash to the <code>alnum</code> rule. 
+</p>
+
+<pre class="explanation">
+$name = "Vane-Tempest-Stewart";
+</pre>
+
+<p>
+Some names might contain dash characters. 
+</p>
+
+<pre class="explanation">
+$r = v::alnum('-')->validate($name);
+</pre>
+
+<p>
+We add a dash character to the <code>alnum</code> rule.
+</p>
+
+
+<h2>Respect Validation chaining rules</h2>
+
+<p>
+The rules can be chained.     
+</p>
+
+<div class="codehead">chaining.php</div>
+<pre class="code">
+&lt;?php
+
+require('vendor/autoload.php');
+
+use Respect\Validation\Validator as v;
+
+$name = "John";
+
+$r = v::alnum()->length(4, null)->validate($name);
+
+if ($r) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+</pre>
+
+<p>
+In the example, we have two rules: <code>alnum</code> and <code>length</code>.
+</p>
+
+<pre class="compact">
+$r = v::alnum()->length(4, null)->validate($name);
+</pre>
+
+<p>
+The name must contain only alphanumeric characters and must have at least 
+four characters.
+</p>
+
+<h2>Respect Validation combining rules</h2>
+
+<p>
+The combining of rules is similar to the chaining technique. The <code>Rules\AllOf</code> 
+is used to combine multiple rules.   
+</p>
+
+<div class="codehead">combine_rules.php</div>
+<pre class="code">
+&lt;?php
+require('vendor/autoload.php');
+
+use Respect\Validation\Validator as v;
+use Respect\Validation\Rules;
+
+$name = "John";
+
+$nameValidator = new Rules\AllOf(
+    new Rules\Alnum(),
+    new Rules\Length(5, 40)
+);
+
+$r = $nameValidator->validate($name);
+
+if ($r) {
+
+    echo "Validation passed";
+} else {
+
+    echo "Validation failed";
+}
+</pre>
+
+<p>
+The example combines two validation rules with <code>Rules\AllOf</code>.
+</p>
+
+<h2>Respect validation assert function</h2>
+
+<p>
+The <code>validate()</code> method returns a boolean value. The <code>assert()</code> 
+method returns a complete validation report.
+</p>
+
+<div class="codehead">assert_fun.php</div>
+<pre class="code">
+&lt;?php
+
+require('vendor/autoload.php');
+
+use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\NestedValidationException;
+
+$name = "";
+
+$validator = v::alnum()->notempty();
+
+try {
+
+    $validator->assert($name);
+} catch(NestedValidationException $ex) {
+
+    $coll = collect($ex->getMessages());
+
+    $messages = $coll->flatten();
+
+    foreach ($messages as $message) {
+        echo $message . "\n";
+    }
+}
+</pre>
+
+<p>
+The example uses an <code>assert()</code> method on 
+a validation rule and shows the error messages.
+</p>
+
+<pre class="explanation">
+$validator->assert($name);
+</pre>
+
+<p>
+We validate a name value with <code>assert()</code>.
+</p>
+
+<pre class="explanation">
+$coll = collect($ex->getMessages());
+
+$messages = $coll->flatten();
+
+foreach ($messages as $message) {
+    echo $message . "\n";
+}
+</pre>
+
+<p>
+With the help of the Laravel's collections, we show the error messages.
+</p>
+
+<pre class="compact">
+$ php assert_fun.php
+"" must contain only letters (a-z) and digits (0-9)
+"" must not be empty
+</pre>
+
+<p>
+This is the output.
+</p>
+
+<div class='ad-board-mid' data-aaad='true' data-aa-adunit='/232881841/ZETC_728v_2'></div>
+<div class='ad-mob-mid' data-aaad='true' data-aa-adunit='/232881841/ZETC_Mob_300v_2'></div>
+
+<h2>Respect Validation between rule</h2>
+
+<p>
+The <code>between</code> rule validates ranges including integers, characters, and 
+dates.
+</p>
+
+<div class="codehead">between_rule.php</div>
+<pre class="code">
+&lt;?php
+
+require('vendor/autoload.php');
+
+use Respect\Validation\Validator as v;
+
+$age = 34; 
+
+$r = v::intVal()->between(18, 99)->validate($age); 
+
+if ($r) {
+
+    echo "Age validation passed\n";
+} else {
+
+    echo "Age validation failed\n";
+}
+
+$char = 'g'; 
+
+$r = v::stringType()->between('a', 'c')->validate($char); 
+
+if ($r) {
+
+    echo "Letter validation passed\n";
+} else {
+
+    echo "Letter validation failed\n";
+}
+
+$myDate = '2013-01-01';
+
+$r = v::date()->between('2009-01-01', '2019-01-01')->validate($myDate);
+
+if ($r) {
+
+    echo "Date validation passed\n";
+} else {
+
+    echo "Date validation failed\n";
+}
+</pre>
+
+<p>
+The example uses the <code>between</code> rule.
+</p>
+
+<pre class="explanation">
+$r = v::intVal()->between(18, 99)->validate($age); 
+</pre>
+
+<p>
+This rule checks if the <code>$age</code> variable is between 18 and 99.
+</p>
+
+<pre class="explanation">
+$r = v::stringType()->between('a', 'c')->validate($char); 
+</pre>
+
+<p>
+This rule checks if the <code>$char</code> variable is between 'a' and 'c' characters.
+</p>
+
+<pre class="explanation">
+$r = v::date()->between('2009-01-01', '2019-01-01')->validate($myDate);
+</pre>
+
+<p>
+This rule checks if the <code>$myDate</code> variable is between two specified dates.
+</p>
+
+<h2>Respect Validation objects</h2>
+
+<p>
+Object attributes are validated with <code>attribute()</code>.
+</p>
+
+<div class="codehead">user.php</div>
+<pre class="code">
+&lt;?php
+
+class User {
+
+    private $name;
+    private $email;
+
+    public function getName() : string {
+
+        return $this->name;
+    }
+
+    public function setName($name) : void {
+
+        $this->name = $name;
+    }
+
+    public function getEmail() : string {
+
+        return $this->email;
+    }
+
+    public function setEmail($email) : void {
+
+        $this->email = $email;
+    }
+}
+</pre>
+
+<p>
+This is <code>user.php</code>.
+</p>
+
+<div class="codehead">validate_object.php</div>
+<pre class="code">
+&lt;?php
+
+require('vendor/autoload.php');
+require_once('user.php');
+
+use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\NestedValidationException;
+
+$user = new User();
+$user->setName('Jo');
+$user->setEmail('johndoe#gmail.com');
+
+$userValidator = v::attribute('name', v::alnum()->length(4, null))
+    ->attribute('email', v::email());
+
+try {
+    $userValidator->assert($user);
+} catch(NestedValidationException $ex) {
+
+    $coll = collect($ex->getMessages());
+
+    $messages = $coll->flatten();
+
+    foreach ($messages as $message) {
+        echo $message . "\n";
+    }
+}
+</pre>
+
+<p>
+The example validates the attributes of the <code>User</code> class.
+</p>
+
+<pre class="explanation">
+$userValidator = v::attribute('name', v::alnum()->length(4, null))
+    ->attribute('email', v::email());
+</pre>
+
+<p>
+These are rules for the attributes of the user object.
+</p>
+
+<pre class="explanation">
+$ php validate_object.php
+name must have a length greater than 4
+email must be valid email
+</pre>
+
+<p>
+This is the output.
+</p>
+
+
+<h2>Custom message</h2>
+
+<p>
+We can provide custom validation messages.
+</p>
+
+<div class="codehead">custom_message.php</div>
+<pre class="code">
+&lt;?php
+
+require('vendor/autoload.php');
+
+use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\NestedValidationException;
+
+$name = "";
+
+$validator = v::alnum()->notEmpty()->setName('name');
+
+try {
+
+    $validator->assert($name);
+} catch(NestedValidationException $ex) {
+
+    $errors = $ex->findMessages([
+        'alnum' => '{{name}} must contain only letters and digits',
+        'notEmpty' => '{{name}} must not be empty'
+    ]);
+
+    $coll = collect($errors);
+
+    $messages = $coll->flatten();
+
+    foreach ($messages as $message) {
+        echo $message . "\n";
+    }
+}
+</pre>
+
+<p>
+The example adds two custom messages.
+</p>
+
+<pre class="explanation">
+$validator = v::alnum()->notEmpty()->setName('name');
+</pre>
+
+<p>
+With the <code>setName()</code> method, we set a value for 
+a template placeholder.
+</p>
+
+<pre class="explanation">
+$errors = $ex->findMessages([
+    'alnum' => '{{name}} must contain only letters and digits',
+    'notEmpty' => '{{name}} must not be empty'
+]);
+</pre>
+
+<p>
+Here we provide custom error messages.
+</p>
+
+<pre class="compact">
+$ php custom_message.php
+name must contain only letters and digits
+name must not be empty
+</pre>
+
+<p>
+This is the output.
+</p>
+
+<p>
+In this tutorial, we have used PHP Respect Validation library to validate values.
+</p>
+
+<div class='ad-board-footer' data-aaad='true' data-aa-adunit='/232881841/ZETC_728v_3'></div>
+<div class='ad-mob-footer' data-aaad='true' data-aa-adunit='/232881841/ZETC_Mob_300v_Sticky'></div>
+
+<p>
+List <a href="/all/#php">all PHP</a> tutorials.
+</p>
+
+
+
+</div> <!-- content -->
+
+<div class="rtow">
+
+<div class='ad-vert' data-aaad='true' data-aa-adunit='/232881841/ZETC_160v_sticky'></div>
+
+</div> <!-- rtow -->
+
+</div> <!-- container -->
+
+<footer>
+
+<nav>
+<a title="Home page" href="/">Home</a> 
+<a title="Follow on Facebook" href="https://www.facebook.com/zetcode7/">Facebook</a>
+<a title="Follow on Twitter" href="https://twitter.com/janbodnar">Twitter</a>
+<a title="Visit Github" href="https://github.com/janbodnar">Github</a>
+<a title="Subscribe to ZetCode news" href="http://zetcode.us13.list-manage.com/subscribe?u=9def9ccd4c70dbbaf691f90fc&id=6556210f80">Subscribe</a>
+<a title="Privacy policy" href="/privacy">Privacy</a> 
+</nav>
+
+<div>
+<span>&copy; 2007 - 2021 Jan Bodnar</span>
+<span>admin(at)zetcode.com</span>
+</div>
+
+</footer>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+</body>
+</html>

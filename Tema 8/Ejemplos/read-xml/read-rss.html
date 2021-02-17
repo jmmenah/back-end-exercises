@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reading Data from XML Files</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+            Reading Data from a XML/RSS file
+        </h1>
+        <p class="subtitle">
+            Based on <strong><a href="https://youtu.be/MDAWie2Sicc">Fetching and Reading XML Data by Steve Griffith</a></strong>
+            and
+            <strong><a href="https://desarrolloweb.com/articulos/crear-rss-php-mysql.html">
+                Crear RSS con PHP a partir de tabla MySQL
+            </a></strong>
+        </p>
+        <article class="panel is-success">
+            <p id="title" class="panel-heading"></p>
+            <div class="content box is-medium">
+                <ul id="items"></ul>
+            </div>
+        </article>
+        <article class="panel is-primary">
+            <p class="panel-heading">
+                <a href="ejemplo-rss-articulos.php">View RSS file: ejemplo-rss-articulos.php</a>
+            </p>
+            <div class="box">
+                <pre id="output"></pre>
+            </div>
+        </article>
+    </div>
+</section>
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+
+            <a href="https://bulma.io">
+                <img
+                        src="https://bulma.io/images/made-with-bulma.png"
+                        alt="Made with Bulma"
+                        width="256"
+                        height="48">
+            </a>
+            <br>
+            <strong><a href="https://bulma.io/"
+                       title="Bulma is a CSS library. This means it provides CSS classes to help you style your HTML code.">Bulma</a>
+            </strong> by <a href="https://jgthms.com">Jeremy Thomas</a>.
+        </p>
+    </div>
+</footer>
+<script>
+    //XMLHttpRequest() - has responseXML property in the response
+
+    document.addEventListener('DOMContentLoaded', () => {
+        //fetch the data as soon as the page has loaded
+        const url = "ejemplo-rss-articulos.php";
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                //console.log(data);  //string
+                let parser = new DOMParser();
+                let xml = parser.parseFromString(data, "application/xml");
+                document.getElementById('output').textContent = data;
+                document.getElementById('title').innerHTML = xml.querySelector('channel title').firstChild.nodeValue;
+                //console.log(xml);
+                buildList(xml);
+            });
+    })
+
+    function buildList(x) {
+        const list = document.getElementById('items');
+        //const items = x.getElementsByTagName('item');
+        const items = x.querySelectorAll('item');
+
+        for (let i = 0; i < items.length; i++) {
+            let title = items[i].querySelector('title').firstChild.nodeValue;
+            let description = items[i].querySelector('description').firstChild.nodeValue;
+            let link = items[i].querySelector('link').firstChild.nodeValue;
+            let pubDate = items[i].querySelector('pubDate').firstChild.nodeValue;
+
+            let a = document.createElement('a');
+            let href = document.createAttribute('href');
+            let aTitle = document.createAttribute('title');
+            a.appendChild(document.createTextNode(title));
+            href.value = link;
+            aTitle.value = description;
+            a.setAttributeNode(href);
+            a.setAttributeNode(aTitle);
+
+            let li = document.createElement('li');
+            li.appendChild(a);
+            li.innerHTML += ' [' + pubDate + ']';
+            list.appendChild(li);
+        }
+    }
+</script>
+</body>
+</html>
