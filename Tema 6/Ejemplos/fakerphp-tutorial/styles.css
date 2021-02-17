@@ -1,0 +1,111 @@
+/* General
+============================== */
+body {
+    font: 1em/1.45 Georgia, serif;
+    background: #e9e9e9 repeat;
+    color: #222;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+strong {
+    font-weight: bold;
+}
+.wrapper {
+    width: 95%;
+    margin: 0 auto;
+}
+.content {
+    padding: 0 2em;
+}
+a {
+    color: #9c0001;
+}
+
+/* Header
+============================== */
+.header {
+    padding: .5em 0;
+    background: #333;
+    color: white;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,.5);
+    background: #45484d; /* Old browsers */
+    background: -moz-linear-gradient(top,  #45484d 0%, #000000 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #45484d 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #45484d 0%,#000000 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #45484d 0%,#000000 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #45484d 0%,#000000 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+.header-title {
+    font-size: 1.25em;
+    font-family: helvetica;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #000;
+}
+
+    /* Article
+============================== */
+.article {
+    max-width: 600px;
+    padding: 0 0 2em;
+    background: #fff;
+    margin: 3em auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+.article a {
+    text-decoration: none;
+}
+.article a:hover {
+    text-decoration: underline;
+}
+.article img {
+    border-radius: 5px 5px 0 0;
+}
+.article-title {
+    display: block;
+    font-size: 1.125em;
+    line-height: 1.2;
+    color: #222;
+    margin: 1em 0 0;
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
+    text-transform: capitalize; /* faker won't output the right capitlization, but CSS can handle it! */
+}
+.article-paragraph {
+    color: #555;
+    font-size: .875em;
+    line-height: 1.5em;
+}
+.article-paragraph:first-letter {
+    text-transform: uppercase;
+}
+ 
+/* Article Meta */
+.article-meta {
+    color: #777;
+    font-size: .75em;
+    font-family: arial;
+    margin: .25em 0 1em;
+    overflow: hidden;
+}
+.article-meta li {
+    float: left;
+    margin-right: 1em;
+}
+.article-meta li:after {
+    content: '\00B7';
+    margin-left: 1em;
+    color: #ccc;
+}
+.article-meta li:last-child:after {
+    display: none;
+}
+.article-author span {
+    font-style: italic;
+}
