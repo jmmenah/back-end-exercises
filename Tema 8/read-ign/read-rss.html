@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reading IGN earthquakes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+            Reading IGN earthquakes
+        </h1>
+        <p class="subtitle">
+            Based on <strong><a href="https://youtu.be/MDAWie2Sicc">Fetching and Reading XML Data by Steve Griffith</a></strong>
+        </p>
+        <article class="panel is-success">
+            <p id="title" class="panel-heading"></p>
+            <div class="content box is-medium">
+                <ul id="items" style="list-style-type:none"></ul>
+            </div>
+        </article>
+        <article class="panel is-primary">
+            <p class="panel-heading">
+                <a href="http://www.ign.es/ign/RssTools/sismologia.xml">View RSS web: http://www.ign.es/ign/RssTools/sismologia.xml</a>
+            </p>
+            <div class="box">
+                <pre id="output"></pre>
+            </div>
+        </article>
+    </div>
+</section>
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+
+            <a href="https://bulma.io">
+                <img
+                        src="https://bulma.io/images/made-with-bulma.png"
+                        alt="Made with Bulma"
+                        width="256"
+                        height="48">
+            </a>
+            <br>
+            <strong><a href="https://bulma.io/"
+                       title="Bulma is a CSS library. This means it provides CSS classes to help you style your HTML code.">Bulma</a>
+            </strong> by <a href="https://jgthms.com">Jeremy Thomas</a>.
+        </p>
+    </div>
+</footer>
+<script>
+    //XMLHttpRequest() - has responseXML property in the response
+
+    document.addEventListener('DOMContentLoaded', () => {
+        //fetch the data as soon as the page has loaded
+        const url = "http://www.ign.es/ign/RssTools/sismologia.xml";
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                //console.log(data);  //string
+                let parser = new DOMParser();
+                let xml = parser.parseFromString(data, "application/xml");
+                document.getElementById('output').textContent = data;
+                document.getElementById('title').innerHTML = xml.querySelector('channel title').firstChild.nodeValue;
+                //console.log(xml);
+                buildList(xml);
+            });
+    })
+
+    function buildList(x) {
+        const list = document.getElementById('items');
+        const items = x.querySelectorAll('item');
+
+        for (let i = 0; i < items.length; i++) {
+            let title = items[i].querySelector('title').firstChild.nodeValue;
+            let description = items[i].querySelector('description').firstChild.nodeValue;
+            let link = items[i].querySelector('link').firstChild.nodeValue;
+
+            let a = document.createElement('a');
+            let href = document.createAttribute('href');
+            let aTitle = document.createAttribute('title');
+
+            let icon = document.createElement('span');
+            let iconClass = document.createAttribute('class');
+            let iconIn = document.createElement('span');
+            let iconInClass = document.createAttribute('class');
+            let info = document.createElement('i');
+            let infoClass = document.createAttribute('class');
+            let infoTitle = document.createAttribute('title');
+            icon.setAttributeNode(iconClass);
+            iconIn.setAttributeNode(iconInClass);
+            info.setAttributeNode(infoClass);
+            info.setAttributeNode(infoTitle);
+            iconIn.appendChild(info);
+            icon.appendChild(iconIn);
+
+            iconClass.value="icon-text has-text-info";
+            iconInClass.value='icon';
+            infoClass.value='fas fa-info-circle';
+            infoTitle.value=title;
+
+            a.appendChild(document.createTextNode(description));
+            href.value = link;
+            aTitle.value = description;
+            a.setAttributeNode(href);
+            a.setAttributeNode(aTitle);
+
+            let li = document.createElement('li');
+            li.appendChild(icon);
+            li.appendChild(a);
+            list.appendChild(li);
+        }
+    }
+</script>
+</body>
+</html>
