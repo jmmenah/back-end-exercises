@@ -11,10 +11,10 @@ class GestionAutomoviles
     public function ConectarMarcas()
     {
         try {
-            $user = "epiz_26867015";  // usuario con el que se va conectar con MySQL
-            $pass = "tJXLcWxY2Fmw";  // contraseña del usuario
-            $dbname = "epiz_26867015_zodiac";  // nombre de la base de datos
-            $host = "sql202.epizy.com";  // nombre o IP del host
+            $user = "root";  // usuario con el que se va conectar con MySQL
+            $pass = "";  // contraseña del usuario
+            $dbname = "cars";  // nombre de la base de datos
+            $host = "localhost";  // nombre o IP del host
 
             $db = new PDO("mysql:host=$host; dbname=$dbname", $user, $pass);  //conectar con MySQL y SELECCIONAR LA Base de Datos
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  //Manejo de errores con PDOException
