@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<!-- ejemplo del curso https://miriadax.net/web/html5mooc -->
+
+<head>
+    <title>Ejemplo de localStorage</title>
+    <meta charset="UTF-8">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+        $(function() {
+            // si variable no existe se crea (primera visita)
+            localStorage.cuenta = (localStorage.cuenta || 0);
+
+            localStorage.cuenta++; // incrementamos cuenta de visitas
+
+            $('#cuenta').html(localStorage.cuenta);
+        });
+
+    </script>
+</head>
+
+<body>
+    <h3>Ejemplo de localStorage</h3>
+
+    Ha visitado esta página <span id='cuenta'></span> veces!
+    <p>JavaScript. Memoria local en HTML5</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Wj1k1O-eR-g?rel=0" allowfullscreen></iframe>
+</body>
+
+</html>

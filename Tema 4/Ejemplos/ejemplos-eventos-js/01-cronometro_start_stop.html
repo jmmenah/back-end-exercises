@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+ <!-- ejemplo del curso https://miriadax.net/web/html5mooc -->
+ <!-- JavaScript. Ejemplo de un cronómetro
+      https://youtu.be/VY-P3faBMc0
+ -->  
+<head>
+    <title>Event Example</title>
+    <meta charset="UTF-8">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+      $(function(){ 
+        var t, cl = $("#crono");
+
+        function mostrar()  { cl.html((+cl.html() + 0.1).toFixed(1)); };
+        function arrancar() { t=setInterval(mostrar, 100);};
+        function parar()    { clearInterval(t);  t=undefined; };
+        function cambiar()  { if (!t) arrancar(); else parar(); };
+
+        $("#cambiar").on('click', cambiar);
+        $("#inicializar").on('click', function(){ cl.html("0.0"); });
+      });
+    </script>
+</head>
+
+<body>
+    <h2>Cronómetro</h2>
+
+    <h2><span id="crono"> 0.0 </span> segundos </h2>
+
+    <button type="button" id="cambiar"> arrancar/parar </button>
+    <button type="button" id="inicializar">  inicializar </button>
+    <p>JavaScript. Ejemplo de un cronómetro</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VY-P3faBMc0?rel=0" allowfullscreen></iframe>
+</body>
+
+</html>

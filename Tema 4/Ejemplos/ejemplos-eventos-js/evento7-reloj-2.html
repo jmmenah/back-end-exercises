@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<!-- Pasando fecha a español del ejemplo del curso https://miriadax.net/web/html5mooc -->
+
+<head>
+    <title>Reloj</title>
+    <meta charset="UTF-8">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+        // toLocaleDateString() method returns a string with a language sensitive representation of the date portion of this date. 
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+        function mostrar_fecha() {
+            // variable opciones para toLocaleDateString
+            var opciones = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZoneName: 'long'
+            };
+            $("#fecha").html(new Date().toLocaleDateString('es-ES', opciones));
+        }
+
+        $(function() {
+            // Define evento periódico, ocurre cada segundo (1000 miliseg)
+            setInterval(mostrar_fecha, 1000);
+
+            // muestra fecha al cargar
+            mostrar_fecha();
+        });
+
+    </script>
+</head>
+
+<body>
+    <h1>Reloj</h1>
+    <div id="fecha"></div>
+</body>
+
+</html>

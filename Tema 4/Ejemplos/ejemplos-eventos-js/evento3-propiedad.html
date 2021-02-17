@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<!-- ejemplo del curso https://miriadax.net/web/html5mooc -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Evento Propiedad</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+    </style>
+    <script>
+        function inicializar() {
+            var img = document.getElementById('bombilla');
+
+            img.ondblclick = function () {img.src='lamp_off.jpg'};
+            img.onclick    = function () {img.src='lamp_on.jpg'};
+        }
+        inicializar();
+    </script>
+</head>
+
+<!-- El arbol DOM debe estar construido, por eso se usa onload -->
+<body onload="inicializar()">
+    <h1>Evento Propiedad</h1>
+    <p>
+      <img id="bombilla" src="lamp_off.jpg" alt="bombilla" />
+    </p>
+</body>
+
+</html>

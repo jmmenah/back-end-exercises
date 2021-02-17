@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<!-- ejemplo del curso https://miriadax.net/web/html5mooc -->
+<head>
+    <title>Reloj</title>
+    <meta charset="UTF-8">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+        function mostrar_fecha() {
+            $("#fecha").html(new Date());
+        }
+
+        $(function() {
+            // Define evento periódico, ocurre cada segundo (1000 miliseg)
+            setInterval(mostrar_fecha, 1000);
+
+            // muestra fecha al cargar
+            mostrar_fecha();
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Reloj</h1>
+    <div id="fecha"></div>
+</body>
+
+</html>

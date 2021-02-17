@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<!-- ejemplo del curso https://miriadax.net/web/html5mooc -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Evento jQuery</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+    </style>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+        $(function() {
+            var img = $('#bombilla');
+
+            img.dblclick(function() { img.attr('src', 'lamp_off.jpg') });
+            img.click (function() { img.attr('src', 'lamp_on.jpg') });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Evento jQuery</h1>
+    <p>
+      <img id="bombilla" src="lamp_off.jpg" alt="bombilla" />
+    </p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/yHSFYQ-T3u8?rel=0&amp;start=457" allowfullscreen></iframe>
+</body>
+
+</html>
