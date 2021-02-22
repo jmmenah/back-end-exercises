@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>AJAX Provincias</title>
+
+
+    <script type="text/javascript" src="index.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Autonomías - Provincias - Municipios</h1>
+            <form id="myForm">
+                <div class="form-group-1" id="divComunidades">
+                    <label>Comunidad:</label>
+                    <select id="comunidades" name="comunidad" class="custom-select custom-select-lg">
+                        <option value="0">Seleccione Comunidad...</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group-2" id="divprovincias" style="display:none">
+                    <label>Provincia:</label>
+                    <select id="provincias" name="provincia" class="custom-select custom-select-lg">
+                        <option value="0">Seleccione Provincia...</option>
+                    </select>
+                </div>
+
+                <div class="form-group-3" id="divmunicipios" style="display:none">
+                    <label>Municipios:</label>
+                    <select id="municipios" name="municipio" class="custom-select custom-select-lg"><option value="0">Seleccione Municipio...</option><option value="07002">Alaior</option><option value="07001">Alaró</option><option value="07003">Alcúdia</option><option value="07004">Algaida</option><option value="07005">Andratx</option><option value="07901">Ariany</option><option value="07006">Artà</option><option value="07007">Banyalbufar</option><option value="07008">Binissalem</option><option value="07009">Búger</option><option value="07010">Bunyola</option><option value="07011">Calvià</option><option value="07012">Campanet</option><option value="07013">Campos</option><option value="07014">Capdepera</option><option value="07064">Castell, Es</option><option value="07015">Ciutadella de Menorca</option><option value="07016">Consell</option><option value="07017">Costitx</option><option value="07018">Deià</option><option value="07026">Eivissa</option><option value="07019">Escorca</option><option value="07020">Esporles</option><option value="07021">Estellencs</option><option value="07022">Felanitx</option><option value="07023">Ferreries</option><option value="07024">Formentera</option><option value="07025">Fornalutx</option><option value="07027">Inca</option><option value="07028">Lloret de Vistalegre</option><option value="07029">Lloseta</option><option value="07030">Llubí</option><option value="07031">Llucmajor</option><option value="07033">Manacor</option><option value="07034">Mancor de la Vall</option><option value="07032">Maó-Mahón</option><option value="07035">Maria de la Salut</option><option value="07036">Marratxí</option><option value="07037">Mercadal, Es</option><option value="07902">Migjorn Gran, Es</option><option value="07038">Montuïri</option><option value="07039">Muro</option><option value="07040">Palma de Mallorca</option><option value="07041">Petra</option><option value="07044">Pobla, Sa</option><option value="07042">Pollença</option><option value="07043">Porreres</option><option value="07045">Puigpunyent</option><option value="07059">Salines, Ses</option><option value="07046">Sant Antoni de Portmany</option><option value="07049">Sant Joan</option><option value="07050">Sant Joan de Labritja</option><option value="07048">Sant Josep de sa Talaia</option><option value="07051">Sant Llorenç des Cardassar</option><option value="07052">Sant Lluís</option><option value="07053">Santa Eugènia</option><option value="07054">Santa Eulària des Riu</option><option value="07055">Santa Margalida</option><option value="07056">Santa María del Camí</option><option value="07057">Santanyí</option><option value="07058">Selva</option><option value="07047">Sencelles</option><option value="07060">Sineu</option><option value="07061">Sóller</option><option value="07062">Son Servera</option><option value="07063">Valldemossa</option><option value="07065">Vilafranca de Bonany</option></select>
+                    </select>
+
+                    <button class="m-3 btn btn-primary btn-lg" type="submit">Enviar</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Datos a enviar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="No implementado">Enviar Datos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
