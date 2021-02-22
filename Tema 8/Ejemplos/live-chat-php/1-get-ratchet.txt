@@ -1,0 +1,4 @@
+1) Download and install Composer - https://getcomposer.org/
+2) Open command line
+3) Navigate to project folder
+4) Run "composer require cboden/ratchet"
