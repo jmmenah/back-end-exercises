@@ -4,9 +4,11 @@
 
 class server {
     private $con;
+    private $IsAuthenticated;
 
-    public static function authenticate($header_params) {
+    public function authenticate($header_params) {
         if($header_params->username == 'ies' && $header_params->password == 'daw') {
+            $this->IsAuthenticated = true;
             return true;
         }  
         else throw new SoapFault('Wrong user/pass combination', 401);  
@@ -15,13 +17,14 @@ class server {
     // singleton
     public function __construct() {
         $this->con = (is_null($this->con)) ? self::connect() : $this->con;
+        $this->IsAuthenticated = false;
     }
 
     static function connect() {
 
         try {
              $user = "root";
-             $pass = "";
+             $pass = "root";
              $dbname = "students";
              $host = "127.0.0.1";
 	
@@ -30,12 +33,14 @@ class server {
              return $con;
         } catch (PDOException $e) {  
              print "<p>Error: " . $e->getMessage() . "</p>\n";  
-	     exit();
+             return null;
+	     //exit();
         }
     }
 
     public function getStudentName($id_array) {
         if (is_null($this->con)) return "ERROR";
+        if (!$this->IsAuthenticated) return "Not Authenticated";
 
         // using prepared statements
         $id = $id_array['id'];
